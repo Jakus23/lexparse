@@ -1,0 +1,227 @@
+stakeholder
+    organisation
+        not for profit
+            non governmental
+            govermental
+        for profit
+            corporate
+                company
+                    public company
+                    private company
+                    sec 53b company 
+                professional
+                    sole propriator
+                    trading as
+                    partnership
+                    trust
+                    practice
+                        :practice number
+                closed corporation
+                ...
+            ...
+        other
+        :tax number
+        :operating status type
+        :trading name
+        :no terminology name
+        :is business unit
+        :is group member
+        :is user classified
+        :is developer of property
+        :is developer of property
+        :incorporation country
+    person
+        :home lauguage=Afrikaans
+        :nationality=Republic of South Africa
+        :birthdate=1986-10-11
+        :first name=Jakobus
+        :gender=male
+            male
+            female
+        :surname=van Rooyen
+        :title=mnr
+            mnr
+            miss
+            mrs
+            ms
+            dr
+            prof
+            ...
+        :identification document type=id
+            id
+            passport
+        :is living=Yes
+        :marital status=married
+            married
+            divorced
+            single
+            widow
+            widower
+            ...
+        :occupation status=employee
+            employee
+            self employed
+            unemployed
+        :residential status=renting
+            renting
+            owner
+        :id number=8610115114082
+        :initials=JJ
+        :income tax number=None
+        :minor child count=2
+    :short name=Jake
+    :full name=Jakobus Johannes van Rooyen
+    :business lauguage=English
+address
+    @stakeholder=0
+    telco
+        @country
+        :telephone number
+        :area dial code
+        :is mobile
+        :is fax
+        :directory entry
+    web address
+        :ip address
+        :url
+    physical address
+        @country
+        @suburb
+        :street name 1
+        :street name 2
+        :street name 3
+        :street name 4
+        :street name 5
+        :street name 6
+        :is postable
+    email
+        :name=Jakus van Rooyen
+        :email address=jakusvanrooyen@gmail.com
+        :is personally owned=Yes
+    box
+        :suburb
+        :postal box
+        :box qualifier
+        :description
+        :postal code
+    :is current
+activities
+    goal
+        :statement=sell stake in businesses,offer business support,exercise control over portfolio companies,oversee assets,negotiate agreement,evaluate transaction structures and pricing,propose capital structure,make reference calls,model fund cash flows,meet fund management teams,complete due diligence,make deal,commit capital,evaluate firm strategy,meet with managers,benchmark,evaluate historical track record vs industry ,source new deals,monitor oppertunities universe,screen oppertunities,update marketing materials,help existing firm,do publication,research topic,generate lead,origanate deal flow,make investment,track investment and liquidity data,liquidate client position,pay management fee,present investment committee information,liquidate funds,perform data analysis,make equity stake more valuable,generate profit,commit capital,explain winning conditions,receive contract feedback,draft contract terms,negotiate contract,log lead,receive indicator of interest,create campaign,target organisation,identify target markets,do prospectus,appoint professional staff,calculate financial results,define new firm structure,define timeframe,create investment proposal,define fund structure,design fund commercial model,define money types that can be invested,define regulatory boundaries,understand investors who can participate,raise funds,capitalise oppertunities at challenged firms
+        :level    
+            purpose #relatively broad statement of intended results to be achieved over more than one resource allocation and performance measurement cycle
+                :is inspirational=Yes
+            mission
+                @purpose=3
+                :guideline=most willing financiers only
+                :scope=not lots of maintenance
+            objective
+                @mission=4,4
+                :start=2020-08-31,2020-08-31
+                :end=None,None
+                :value chain status=development,research
+                    primary
+                        marketing
+                        sales
+                        take on
+                        retention
+                        exit
+                    support
+                        research
+                        development
+                        management
+                        procurement
+                            infrastructure
+                            systems
+                            information security
+                            business intelligence
+                            legal
+                            human resources
+                                recruiting
+                                retention
+                                performance management
+                    loop
+                        financial
+                        stakeholder
+                        product
+                        process
+                        capability
+            operation
+                #conduct an ongoing transformation to achieve a outcome
+                @objective=7,5,5
+                :result= general partner owner and investor expections,conditions they can invest under,universe of available funders
+                :orientation=function,function,function
+                    object
+                    function
+    type
+        @goal
+        :statement
+    principle
+        @organisation
+        #helps to define the essential character of the organisation
+        :level
+            value
+            fundemental
+            practice
+    vision #motivating actions toward a future state it strives to achieve
+        @organisation
+        @principle
+        @goal
+        :statement #concise and inspirational
+            /a world in which no child goes to sleep hungry
+#metric
+scale
+    :unit of measure #scale which measurements are divided into increments
+    :dimension #aspect of reality
+        objective
+            time
+            currency
+        subjective
+            force #A dynamic that may powerfully influence the successfull achievement of goals
+                swot
+                    impact
+                        threat #Difficult issue to overcome to achieve an objective
+                        oppertunity #Capitalise on condition to benefit its stakeholders
+                    likelihood
+                        strenght #A positive aspect of an organization that may provide a competitive advantage
+                        weakness
+                pestle #A condition that may affect the achievement of a goal
+                    political
+                    economic
+                    society
+                    techological
+                    legal
+                    envirnomental
+                five forces
+                compentency #A unique capability difficult for competitors to duplicate can contributes perceived value to beneficiaries
+                    core
+                    support
+                    ancillary
+                    @stakeholder
+                ...
+                
+    :sensor
+rating
+    @stakeholder
+    @goal
+    @scale
+    :priority
+        critical
+        contribution
+        support
+    :direction
+        inhibiting
+        enabling
+    :control
+        direct
+        indirect
+result
+    @rating
+    target #result to be achieved
+        :weighting #percentage of a total score
+        :specified date
+    actual #result achieved at a point in time
+        @target
+        :measurement date
+            #on or before specified date
+    :units

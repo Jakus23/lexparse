@@ -7,26 +7,23 @@ Rule 1     code -> attribute
 Rule 2     code -> context
 Rule 3     code -> attribute code
 Rule 4     code -> context code
-Rule 5     attribute -> TYPE ASSIGN NEWLINE
-Rule 6     attribute -> TYPE
-Rule 7     attribute -> PROPERTY
-Rule 8     attribute -> DEPENDENT
-Rule 9     context -> ASSIGN NEWLINE
-Rule 10    context -> COMMENT
-Rule 11    context -> NEWLINE
-Rule 12    context -> ELLIPSIS
-Rule 13    context -> TAB
+Rule 5     attribute -> ATTRIBUTE
+Rule 6     context -> ASSIGN
+Rule 7     context -> COMMENT
+Rule 8     context -> NEWLINE
+Rule 9     context -> ELLIPSIS
+Rule 10    context -> TAB
+Rule 11    context -> EXAMPLE
 
 Terminals, with rules where they appear
 
-ASSIGN               : 5 9
-COMMENT              : 10
-DEPENDENT            : 8
-ELLIPSIS             : 12
-NEWLINE              : 5 9 11
-PROPERTY             : 7
-TAB                  : 13
-TYPE                 : 5 6
+ASSIGN               : 6
+ATTRIBUTE            : 5
+COMMENT              : 7
+ELLIPSIS             : 9
+EXAMPLE              : 11
+NEWLINE              : 8
+TAB                  : 10
 error                : 
 
 Nonterminals, with rules where they appear
@@ -44,24 +41,21 @@ state 0
     (2) code -> . context
     (3) code -> . attribute code
     (4) code -> . context code
-    (5) attribute -> . TYPE ASSIGN NEWLINE
-    (6) attribute -> . TYPE
-    (7) attribute -> . PROPERTY
-    (8) attribute -> . DEPENDENT
-    (9) context -> . ASSIGN NEWLINE
-    (10) context -> . COMMENT
-    (11) context -> . NEWLINE
-    (12) context -> . ELLIPSIS
-    (13) context -> . TAB
+    (5) attribute -> . ATTRIBUTE
+    (6) context -> . ASSIGN
+    (7) context -> . COMMENT
+    (8) context -> . NEWLINE
+    (9) context -> . ELLIPSIS
+    (10) context -> . TAB
+    (11) context -> . EXAMPLE
 
-    TYPE            shift and go to state 4
-    PROPERTY        shift and go to state 7
-    DEPENDENT       shift and go to state 8
+    ATTRIBUTE       shift and go to state 4
     ASSIGN          shift and go to state 5
-    COMMENT         shift and go to state 9
-    NEWLINE         shift and go to state 6
-    ELLIPSIS        shift and go to state 10
-    TAB             shift and go to state 11
+    COMMENT         shift and go to state 6
+    NEWLINE         shift and go to state 7
+    ELLIPSIS        shift and go to state 8
+    TAB             shift and go to state 9
+    EXAMPLE         shift and go to state 10
 
     code                           shift and go to state 1
     attribute                      shift and go to state 2
@@ -81,28 +75,25 @@ state 2
     (2) code -> . context
     (3) code -> . attribute code
     (4) code -> . context code
-    (5) attribute -> . TYPE ASSIGN NEWLINE
-    (6) attribute -> . TYPE
-    (7) attribute -> . PROPERTY
-    (8) attribute -> . DEPENDENT
-    (9) context -> . ASSIGN NEWLINE
-    (10) context -> . COMMENT
-    (11) context -> . NEWLINE
-    (12) context -> . ELLIPSIS
-    (13) context -> . TAB
+    (5) attribute -> . ATTRIBUTE
+    (6) context -> . ASSIGN
+    (7) context -> . COMMENT
+    (8) context -> . NEWLINE
+    (9) context -> . ELLIPSIS
+    (10) context -> . TAB
+    (11) context -> . EXAMPLE
 
     $end            reduce using rule 1 (code -> attribute .)
-    TYPE            shift and go to state 4
-    PROPERTY        shift and go to state 7
-    DEPENDENT       shift and go to state 8
+    ATTRIBUTE       shift and go to state 4
     ASSIGN          shift and go to state 5
-    COMMENT         shift and go to state 9
-    NEWLINE         shift and go to state 6
-    ELLIPSIS        shift and go to state 10
-    TAB             shift and go to state 11
+    COMMENT         shift and go to state 6
+    NEWLINE         shift and go to state 7
+    ELLIPSIS        shift and go to state 8
+    TAB             shift and go to state 9
+    EXAMPLE         shift and go to state 10
 
     attribute                      shift and go to state 2
-    code                           shift and go to state 12
+    code                           shift and go to state 11
     context                        shift and go to state 3
 
 state 3
@@ -113,197 +104,135 @@ state 3
     (2) code -> . context
     (3) code -> . attribute code
     (4) code -> . context code
-    (5) attribute -> . TYPE ASSIGN NEWLINE
-    (6) attribute -> . TYPE
-    (7) attribute -> . PROPERTY
-    (8) attribute -> . DEPENDENT
-    (9) context -> . ASSIGN NEWLINE
-    (10) context -> . COMMENT
-    (11) context -> . NEWLINE
-    (12) context -> . ELLIPSIS
-    (13) context -> . TAB
+    (5) attribute -> . ATTRIBUTE
+    (6) context -> . ASSIGN
+    (7) context -> . COMMENT
+    (8) context -> . NEWLINE
+    (9) context -> . ELLIPSIS
+    (10) context -> . TAB
+    (11) context -> . EXAMPLE
 
     $end            reduce using rule 2 (code -> context .)
-    TYPE            shift and go to state 4
-    PROPERTY        shift and go to state 7
-    DEPENDENT       shift and go to state 8
+    ATTRIBUTE       shift and go to state 4
     ASSIGN          shift and go to state 5
-    COMMENT         shift and go to state 9
-    NEWLINE         shift and go to state 6
-    ELLIPSIS        shift and go to state 10
-    TAB             shift and go to state 11
+    COMMENT         shift and go to state 6
+    NEWLINE         shift and go to state 7
+    ELLIPSIS        shift and go to state 8
+    TAB             shift and go to state 9
+    EXAMPLE         shift and go to state 10
 
     context                        shift and go to state 3
-    code                           shift and go to state 13
+    code                           shift and go to state 12
     attribute                      shift and go to state 2
 
 state 4
 
-    (5) attribute -> TYPE . ASSIGN NEWLINE
-    (6) attribute -> TYPE .
+    (5) attribute -> ATTRIBUTE .
 
-  ! shift/reduce conflict for ASSIGN resolved as shift
-    ASSIGN          shift and go to state 14
-    TYPE            reduce using rule 6 (attribute -> TYPE .)
-    PROPERTY        reduce using rule 6 (attribute -> TYPE .)
-    DEPENDENT       reduce using rule 6 (attribute -> TYPE .)
-    COMMENT         reduce using rule 6 (attribute -> TYPE .)
-    NEWLINE         reduce using rule 6 (attribute -> TYPE .)
-    ELLIPSIS        reduce using rule 6 (attribute -> TYPE .)
-    TAB             reduce using rule 6 (attribute -> TYPE .)
-    $end            reduce using rule 6 (attribute -> TYPE .)
-
-  ! ASSIGN          [ reduce using rule 6 (attribute -> TYPE .) ]
+    ATTRIBUTE       reduce using rule 5 (attribute -> ATTRIBUTE .)
+    ASSIGN          reduce using rule 5 (attribute -> ATTRIBUTE .)
+    COMMENT         reduce using rule 5 (attribute -> ATTRIBUTE .)
+    NEWLINE         reduce using rule 5 (attribute -> ATTRIBUTE .)
+    ELLIPSIS        reduce using rule 5 (attribute -> ATTRIBUTE .)
+    TAB             reduce using rule 5 (attribute -> ATTRIBUTE .)
+    EXAMPLE         reduce using rule 5 (attribute -> ATTRIBUTE .)
+    $end            reduce using rule 5 (attribute -> ATTRIBUTE .)
 
 
 state 5
 
-    (9) context -> ASSIGN . NEWLINE
+    (6) context -> ASSIGN .
 
-    NEWLINE         shift and go to state 15
+    ATTRIBUTE       reduce using rule 6 (context -> ASSIGN .)
+    ASSIGN          reduce using rule 6 (context -> ASSIGN .)
+    COMMENT         reduce using rule 6 (context -> ASSIGN .)
+    NEWLINE         reduce using rule 6 (context -> ASSIGN .)
+    ELLIPSIS        reduce using rule 6 (context -> ASSIGN .)
+    TAB             reduce using rule 6 (context -> ASSIGN .)
+    EXAMPLE         reduce using rule 6 (context -> ASSIGN .)
+    $end            reduce using rule 6 (context -> ASSIGN .)
 
 
 state 6
 
-    (11) context -> NEWLINE .
+    (7) context -> COMMENT .
 
-    TYPE            reduce using rule 11 (context -> NEWLINE .)
-    PROPERTY        reduce using rule 11 (context -> NEWLINE .)
-    DEPENDENT       reduce using rule 11 (context -> NEWLINE .)
-    ASSIGN          reduce using rule 11 (context -> NEWLINE .)
-    COMMENT         reduce using rule 11 (context -> NEWLINE .)
-    NEWLINE         reduce using rule 11 (context -> NEWLINE .)
-    ELLIPSIS        reduce using rule 11 (context -> NEWLINE .)
-    TAB             reduce using rule 11 (context -> NEWLINE .)
-    $end            reduce using rule 11 (context -> NEWLINE .)
+    ATTRIBUTE       reduce using rule 7 (context -> COMMENT .)
+    ASSIGN          reduce using rule 7 (context -> COMMENT .)
+    COMMENT         reduce using rule 7 (context -> COMMENT .)
+    NEWLINE         reduce using rule 7 (context -> COMMENT .)
+    ELLIPSIS        reduce using rule 7 (context -> COMMENT .)
+    TAB             reduce using rule 7 (context -> COMMENT .)
+    EXAMPLE         reduce using rule 7 (context -> COMMENT .)
+    $end            reduce using rule 7 (context -> COMMENT .)
 
 
 state 7
 
-    (7) attribute -> PROPERTY .
+    (8) context -> NEWLINE .
 
-    TYPE            reduce using rule 7 (attribute -> PROPERTY .)
-    PROPERTY        reduce using rule 7 (attribute -> PROPERTY .)
-    DEPENDENT       reduce using rule 7 (attribute -> PROPERTY .)
-    ASSIGN          reduce using rule 7 (attribute -> PROPERTY .)
-    COMMENT         reduce using rule 7 (attribute -> PROPERTY .)
-    NEWLINE         reduce using rule 7 (attribute -> PROPERTY .)
-    ELLIPSIS        reduce using rule 7 (attribute -> PROPERTY .)
-    TAB             reduce using rule 7 (attribute -> PROPERTY .)
-    $end            reduce using rule 7 (attribute -> PROPERTY .)
+    ATTRIBUTE       reduce using rule 8 (context -> NEWLINE .)
+    ASSIGN          reduce using rule 8 (context -> NEWLINE .)
+    COMMENT         reduce using rule 8 (context -> NEWLINE .)
+    NEWLINE         reduce using rule 8 (context -> NEWLINE .)
+    ELLIPSIS        reduce using rule 8 (context -> NEWLINE .)
+    TAB             reduce using rule 8 (context -> NEWLINE .)
+    EXAMPLE         reduce using rule 8 (context -> NEWLINE .)
+    $end            reduce using rule 8 (context -> NEWLINE .)
 
 
 state 8
 
-    (8) attribute -> DEPENDENT .
+    (9) context -> ELLIPSIS .
 
-    TYPE            reduce using rule 8 (attribute -> DEPENDENT .)
-    PROPERTY        reduce using rule 8 (attribute -> DEPENDENT .)
-    DEPENDENT       reduce using rule 8 (attribute -> DEPENDENT .)
-    ASSIGN          reduce using rule 8 (attribute -> DEPENDENT .)
-    COMMENT         reduce using rule 8 (attribute -> DEPENDENT .)
-    NEWLINE         reduce using rule 8 (attribute -> DEPENDENT .)
-    ELLIPSIS        reduce using rule 8 (attribute -> DEPENDENT .)
-    TAB             reduce using rule 8 (attribute -> DEPENDENT .)
-    $end            reduce using rule 8 (attribute -> DEPENDENT .)
+    ATTRIBUTE       reduce using rule 9 (context -> ELLIPSIS .)
+    ASSIGN          reduce using rule 9 (context -> ELLIPSIS .)
+    COMMENT         reduce using rule 9 (context -> ELLIPSIS .)
+    NEWLINE         reduce using rule 9 (context -> ELLIPSIS .)
+    ELLIPSIS        reduce using rule 9 (context -> ELLIPSIS .)
+    TAB             reduce using rule 9 (context -> ELLIPSIS .)
+    EXAMPLE         reduce using rule 9 (context -> ELLIPSIS .)
+    $end            reduce using rule 9 (context -> ELLIPSIS .)
 
 
 state 9
 
-    (10) context -> COMMENT .
+    (10) context -> TAB .
 
-    TYPE            reduce using rule 10 (context -> COMMENT .)
-    PROPERTY        reduce using rule 10 (context -> COMMENT .)
-    DEPENDENT       reduce using rule 10 (context -> COMMENT .)
-    ASSIGN          reduce using rule 10 (context -> COMMENT .)
-    COMMENT         reduce using rule 10 (context -> COMMENT .)
-    NEWLINE         reduce using rule 10 (context -> COMMENT .)
-    ELLIPSIS        reduce using rule 10 (context -> COMMENT .)
-    TAB             reduce using rule 10 (context -> COMMENT .)
-    $end            reduce using rule 10 (context -> COMMENT .)
+    ATTRIBUTE       reduce using rule 10 (context -> TAB .)
+    ASSIGN          reduce using rule 10 (context -> TAB .)
+    COMMENT         reduce using rule 10 (context -> TAB .)
+    NEWLINE         reduce using rule 10 (context -> TAB .)
+    ELLIPSIS        reduce using rule 10 (context -> TAB .)
+    TAB             reduce using rule 10 (context -> TAB .)
+    EXAMPLE         reduce using rule 10 (context -> TAB .)
+    $end            reduce using rule 10 (context -> TAB .)
 
 
 state 10
 
-    (12) context -> ELLIPSIS .
+    (11) context -> EXAMPLE .
 
-    TYPE            reduce using rule 12 (context -> ELLIPSIS .)
-    PROPERTY        reduce using rule 12 (context -> ELLIPSIS .)
-    DEPENDENT       reduce using rule 12 (context -> ELLIPSIS .)
-    ASSIGN          reduce using rule 12 (context -> ELLIPSIS .)
-    COMMENT         reduce using rule 12 (context -> ELLIPSIS .)
-    NEWLINE         reduce using rule 12 (context -> ELLIPSIS .)
-    ELLIPSIS        reduce using rule 12 (context -> ELLIPSIS .)
-    TAB             reduce using rule 12 (context -> ELLIPSIS .)
-    $end            reduce using rule 12 (context -> ELLIPSIS .)
+    ATTRIBUTE       reduce using rule 11 (context -> EXAMPLE .)
+    ASSIGN          reduce using rule 11 (context -> EXAMPLE .)
+    COMMENT         reduce using rule 11 (context -> EXAMPLE .)
+    NEWLINE         reduce using rule 11 (context -> EXAMPLE .)
+    ELLIPSIS        reduce using rule 11 (context -> EXAMPLE .)
+    TAB             reduce using rule 11 (context -> EXAMPLE .)
+    EXAMPLE         reduce using rule 11 (context -> EXAMPLE .)
+    $end            reduce using rule 11 (context -> EXAMPLE .)
 
 
 state 11
-
-    (13) context -> TAB .
-
-    TYPE            reduce using rule 13 (context -> TAB .)
-    PROPERTY        reduce using rule 13 (context -> TAB .)
-    DEPENDENT       reduce using rule 13 (context -> TAB .)
-    ASSIGN          reduce using rule 13 (context -> TAB .)
-    COMMENT         reduce using rule 13 (context -> TAB .)
-    NEWLINE         reduce using rule 13 (context -> TAB .)
-    ELLIPSIS        reduce using rule 13 (context -> TAB .)
-    TAB             reduce using rule 13 (context -> TAB .)
-    $end            reduce using rule 13 (context -> TAB .)
-
-
-state 12
 
     (3) code -> attribute code .
 
     $end            reduce using rule 3 (code -> attribute code .)
 
 
-state 13
+state 12
 
     (4) code -> context code .
 
     $end            reduce using rule 4 (code -> context code .)
 
-
-state 14
-
-    (5) attribute -> TYPE ASSIGN . NEWLINE
-
-    NEWLINE         shift and go to state 16
-
-
-state 15
-
-    (9) context -> ASSIGN NEWLINE .
-
-    TYPE            reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    PROPERTY        reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    DEPENDENT       reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    ASSIGN          reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    COMMENT         reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    NEWLINE         reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    ELLIPSIS        reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    TAB             reduce using rule 9 (context -> ASSIGN NEWLINE .)
-    $end            reduce using rule 9 (context -> ASSIGN NEWLINE .)
-
-
-state 16
-
-    (5) attribute -> TYPE ASSIGN NEWLINE .
-
-    TYPE            reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    PROPERTY        reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    DEPENDENT       reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    ASSIGN          reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    COMMENT         reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    NEWLINE         reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    ELLIPSIS        reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    TAB             reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-    $end            reduce using rule 5 (attribute -> TYPE ASSIGN NEWLINE .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for ASSIGN in state 4 resolved as shift

@@ -1,8 +1,8 @@
 def t_error(t):
     "Error handling rule"
-    print("Illegal character '%s'" % t.value[0])
+    print("Illegal character '%s' in line %s" % (t.value[0], t.lineno))
     t.lexer.skip(1)
-tokens =('TYPE','DEPENDENT','PROPERTY','COMMENT','ELLIPSIS','ASSIGN','NEWLINE','TAB')
+tokens =('ATTRIBUTE','COMMENT','ELLIPSIS','ASSIGN','NEWLINE','TAB','EXAMPLE')
 def t_TAB(t):
     r'\t '
     return t
@@ -11,104 +11,98 @@ def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
     return t
-def t_TYPE(t):
-    r'[/\\a-z0-9 ]+'
+def t_ATTRIBUTE(t):
+    r'[\@\:\!/\\a-z0-9 ]+'
     t.value = t.value.strip()
-    t.value = t.value.replace('/','')
-    t.value = t.value.replace('\\','')
-    t.value = t.value.replace(' ','_')
-    return t
-def t_DEPENDENT(t):
-    r'@[a-z0-9 ]+'
-    t.value = t.value.replace('@','')
-    t.value = str(t.value).strip()
-    t.value = str(t.value).replace(' ','_')
-    return t
-def t_PROPERTY(t):
-    r':|!|has-|[a-z0-9 ]+'
-    t.value = str(t.value)[1:]
-    t.value = str(t.value).strip()
-    t.value = str(t.value).replace(' ','_')
     return t
 def t_COMMENT(t):
     r'\#[a-zA-Z0-9_ ]+'
-    t.value = str(t.value)[1:]
     t.value = str(t.value).strip()
     return t
 def t_ASSIGN(t):
-    r'=.*'
-    t.value = str(t.value)[1:]
-    t.value = str(t.value).strip()
+    r'=[/\\a-zA-Z0-9\,\-\_\@\.\/\#\&\+\- ]+'
     return t
+t_EXAMPLE=r'/[/\\a-z\,\-\_A-Z0-9 ]+'
+    
 t_ELLIPSIS = r'\.\.\.'
 import ply.lex as lex
 lexer = lex.lex()
 
+
+
+
+    
+
 # Parsing rules
 
-state={'current_type':[],'level':0}
 def p_attributes(t):
     '''code : attribute
             | context
             | attribute code
             | context code'''
-def p_attribute_type_assign_newline(t):
-    'attribute : TYPE ASSIGN NEWLINE'
-    if len(state['current_type'])<state['level']:
-        for i in range(state['level']-len(state['current_type'])):
-            state['current_type'].append(t[1])
-    state['current_type'][state['level']-1]=t[1]
-    print('TYPE ASSIGN NEWLINE:',list(t))
-    state['level']=0
-def p_attribute_type(t):
-    'attribute : TYPE'
-    ...#commit previous type
-    if len(state['current_type'])<state['level']:
-        for i in range(state['level']-len(state['current_type'])):
-            state['current_type'].append(t[1])
-    state['current_type'][state['level']-1]=t[1]
-    print('TYPE:',list(t))
-def p_attribute_property(t):
-    'attribute : PROPERTY'
-    print('PROPERTY:',list(t))
-def p_attribute_dependent(t):
-    'attribute : DEPENDENT'
-    print('DEPENDENT:',list(t))
-def p_attribute_assignment(t):
-    'context : ASSIGN NEWLINE'
-    state['level']=0
-    print('ASSIGN:',list(t))
-def p_attribute_comment(t):
+def p_attribute(t):
+    'attribute : ATTRIBUTE'
+    state['description']=list(t)
+    state['token']='attribute'
+    if state['indent'] >= len(list_of_types)-1:
+        list_of_types.append(list(t)[1])
+    else:
+        list_of_types[state['indent']+1]=list(t)[1]
+    if list(t)[1][0] in (':'):
+        records.append([list_of_types[state['indent']],'has-a',list(t)[1][1:]])
+    if list(t)[1][0] in ('@'):
+        records.append([list_of_types[state['indent']],'is dependent on',list(t)[1][1:]])
+    if list(t)[1][0] not in (':','@'):
+        records.append([list_of_types[state['indent']].replace(':','').replace('@',''),'can-be-a',list(t)[1]])
+    #print(state)
+def p_assign(t):
+    'context : ASSIGN'
+    state['description']=list(t)
+    state['token']='assign'
+    records.append([list_of_types[state['indent']+1],'has value',list(t)[1][1:].split(",")])
+    #print(state)
+def p_comment(t):
     'context : COMMENT'
-    print('COMMENT:',list(t))
-def p_attribute_newline(t):
+    state['description']=list(t)
+    state['token']='comment'
+    #print(state)
+def p_newline(t):
     'context : NEWLINE'
-    print('NEWLINE:',list(t))
-    state['level']=0
-def p_attribute_ELLIPSIS(t):
+    state['description']=list(t)
+    state['token']='newline'
+    state['indent']=0
+    state['line']+=1
+def p_ellipsis(t):
     'context : ELLIPSIS'
-    print('ELLIPSIS:',list(t))    
-def p_attribute_tab(t):
+    state['token']='ellipsis'
+    state['description']=list(t)
+def p_tab(t):
     'context : TAB'
-    state['level']+=1
+    state['description']=list(t)
+    state['token']='tab'
+    state['indent']+=1
+    #print(state)
+def p_example(t):
+    'context : EXAMPLE'
+    state['description']=list(t)
+    state['token']='example'
+    state['indent']+=1
+    #print(state)
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
     input()
-
 import ply.yacc as yacc
 parser = yacc.yacc()
-#parser.parse("type=2\n\t\t:property\n")
-def convert_slug_to_string(slug):
-    return str(open(slug, 'r').read()).replace('    ','\t')
-parser.parse(convert_slug_to_string("https://repl.it/@Jakusvan/lexparse#type"))
 
-"""
+def parse_file(slug):
+    parser.parse(str(open(slug, 'r').read()).replace('    ','\t'))
+    list_of_types=[ntpath.basename(slug)]
+
+#initiate   
+import ntpath
+list_of_types=[]
+records=[]
+state={'indent':0,'line':1,'description':None,'token':None}
+
 if __name__=='__main__':
-    def convert_slug_to_string(slug):
-        return str(open(slug, 'r').read()).replace('    ','\t')
-    lexer.input(convert_slug_to_string("C:\\Users\\Christine Van Rooyen\\Documents\\Jakus\\Code\\business_model"))
-    line_start=0
-    for token in lexer:
-        if token.type=='NEWLINE': line_start = token.lexpos + 1
-        print({'type':token.type,'value':token.value,'line': token.lineno,'position':token.lexpos,'column':((token.lexpos - line_start) + 1)})
-"""
+    parse_file("https://repl.it/@Jakusvan/lexparse#strategy.txt")
